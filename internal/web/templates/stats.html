@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stats for /{{.Link.Code}}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <h1>Stats for /{{.Link.Code}}</h1>
+  <div class="card">
+    <p><b>Short link:</b> <a href="/{{.Link.Code}}">{{.BaseURL}}/{{.Link.Code}}</a></p>
+    <p><b>Destination:</b> {{.Link.TargetURL}}</p>
+    <p><b>Clicks:</b> <span class="big">{{.Link.Clicks}}</span></p>
+    <p><b>Created:</b> {{.Link.CreatedAt.Format "02 Jan 2006 15:04"}}</p>
+  </div>
+  <a href="/">← Back</a>
+</main>
+</body>
+</html>

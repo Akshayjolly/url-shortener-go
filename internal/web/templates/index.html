@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go URL Shortener</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <h1>🔗 URL Shortener</h1>
+
+  <form method="post" action="/shorten" class="card">
+    <label>Long URL
+      <input type="text" name="url" value="{{.URL}}" placeholder="https://www.griffith.ie/..." required>
+    </label>
+    <label>Custom code (optional)
+      <input type="text" name="code" value="{{.Code}}" placeholder="e.g. my-cv" pattern="[A-Za-z0-9_\-]{3,32}">
+    </label>
+    <button type="submit">Shorten</button>
+  </form>
+
+  {{if .Error}}<p class="error">{{.Error}}</p>{{end}}
+
+  {{with .Created}}
+  <div class="card success">
+    Your short link:
+    <a href="/{{.Code}}" target="_blank">{{$.BaseURL}}/{{.Code}}</a>
+    <small>→ {{.TargetURL}}</small>
+  </div>
+  {{end}}
+
+  <h2>Recent links</h2>
+  <table>
+    <tr><th>Short</th><th>Destination</th><th>Clicks</th><th></th></tr>
+    {{range .Recent}}
+    <tr>
+      <td><a href="/{{.Code}}" target="_blank">/{{.Code}}</a></td>
+      <td class="url">{{.TargetURL}}</td>
+      <td>{{.Clicks}}</td>
+      <td><a href="/stats/{{.Code}}">stats</a></td>
+    </tr>
+    {{else}}
+    <tr><td colspan="4">No links yet.</td></tr>
+    {{end}}
+  </table>
+</main>
+</body>
+</html>
