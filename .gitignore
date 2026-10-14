@@ -1,0 +1,9 @@
+# build output
+/bin/
+/url-shortener
+*.exe
+*.test
+*.out
+.idea/
+.vscode/
+.DS_Store
